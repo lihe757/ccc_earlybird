@@ -37,6 +37,7 @@ cc.Class({
 
     callback: function (event, customEventData) {
         var btnStart = event.target;
+        cc.director.loadScene("Game");
     },
 
     scrollLand:function(dt){
