@@ -1,0 +1,89 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "flyidle",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8166666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "38739579-686e-41fb-ae4a-486433c78b85"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "d247b252-579d-45e5-aa5b-460f256836bb"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "ec50c059-6c83-4465-bced-59444dcb9108"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "d247b252-579d-45e5-aa5b-460f256836bb"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "38739579-686e-41fb-ae4a-486433c78b85"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "d247b252-579d-45e5-aa5b-460f256836bb"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "ec50c059-6c83-4465-bced-59444dcb9108"
+            }
+          },
+          {
+            "frame": 0.7,
+            "value": {
+              "__uuid__": "d247b252-579d-45e5-aa5b-460f256836bb"
+            }
+          },
+          {
+            "frame": 0.8,
+            "value": {
+              "__uuid__": "38739579-686e-41fb-ae4a-486433c78b85"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "y": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.4,
+          "value": 8
+        },
+        {
+          "frame": 0.7,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}
