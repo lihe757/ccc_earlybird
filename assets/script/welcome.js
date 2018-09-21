@@ -32,27 +32,14 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function () {
-        this.schedule(this.scrollLand, 0.01);
+       
     },
 
     callback: function (event, customEventData) {
         var btnStart = event.target;
         cc.director.loadScene("Game");
     },
-
-    scrollLand:function(dt){
-        var land1 = this.node.getChildByName("land1");
-        var land2 = this.node.getChildByName("land2");
-        var bg = this.node.getChildByName("bg");
-
-        var halfBgW = bg.width/2;
-        land1.x = land1.x - 2.0;
-        land2.x = land1.x + land1.getContentSize().width - 2.0;
-        if(land1.x < -(halfBgW + land1.getContentSize().width)){
-            land1.x = -halfBgW;
-        }
-    },
-
+    
     start () {
 
     },

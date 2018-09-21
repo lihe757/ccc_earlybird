@@ -92,6 +92,9 @@
     "_components": [
       {
         "__id__": 19
+      },
+      {
+        "__id__": 20
       }
     ],
     "_prefab": null,
@@ -875,5 +878,22 @@
     "_fitWidth": false,
     "_fitHeight": true,
     "_id": "a2uw6jGjVM+azGUg2A9CFH"
+  },
+  {
+    "__type__": "78d31u3fsBG+qzVMwUN/82H",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "land1": {
+      "__id__": 15
+    },
+    "land2": {
+      "__id__": 17
+    },
+    "bgWidth": 288,
+    "_id": "6fgVrC8RRJF67KES5Dhhcq"
   }
 ]
