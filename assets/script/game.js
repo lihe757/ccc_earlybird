@@ -38,7 +38,7 @@ cc.Class({
         this._score = 0;
         this.physicsManager = cc.director.getPhysicsManager();
         this.physicsManager.enabled = true;
-        
+
         this.gameStatus = Utils.GameStatus.READY;
 
 
@@ -48,6 +48,9 @@ cc.Class({
             var GameStatus = Utils.GameStatus;
             if(this.gameStatus == GameStatus.READY) {
                 this.onGameStart();
+            }
+            if(this.gameStatus == GameStatus.START){
+                this.bird.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 200);
             }
         }.bind(this), this);
 
@@ -124,9 +127,15 @@ cc.Class({
 
     },
 
+    rotateBird(){
+        var bird = this.bird;
+        var verticalSpeed = bird.getComponent(cc.RigidBody).linearVelocity.y;
+        bird.setRotation(Math.min(Math.max(-90, (verticalSpeed*0.2 + 60)), 30));
+    },
+
     update (dt) {
         if (this.gameStatus == Utils.GameStatus.START) {
-            // this.rotateBird();
+            this.rotateBird();
             // this.checkHit();
         }
 
