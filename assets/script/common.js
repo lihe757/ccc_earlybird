@@ -43,6 +43,11 @@ var Utils = {
             f = f.substring(m[0].length);
         }
         return o.join('');
+    },
+    GameStatus :{
+        READY : 1,
+        START : 2,
+        OVER : 3
     }
 }
 

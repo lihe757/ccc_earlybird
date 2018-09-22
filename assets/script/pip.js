@@ -37,13 +37,8 @@ cc.Class({
 
     },
 
-    fly(){
+    update (dt) {
 
+        
     },
-    
-    idle(){
-
-    }
-
-    // update (dt) {},
 });

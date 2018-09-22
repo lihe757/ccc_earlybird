@@ -25,6 +25,10 @@ cc.Class({
         numberAtlas:{
             default: null,
             type: cc.SpriteAtlas
+        },
+        bird:{
+            type: cc.Node,
+            default: null
         }
     },
 
@@ -32,15 +36,47 @@ cc.Class({
 
     onLoad () {
         this._score = 0;
-        this.schedule(function(){
-            cc.log("----vvv");
+        this.gameStatus = Utils.GameStatus.READY;
+        // this.schedule(function(){
+        //     cc.log("----vvv");
             
-            this.onGamePlaying(this._score++);
-        }.bind(this), 1);
+        //     this.onGamePlaying(this._score++);
+        // }.bind(this), 1);
 
     },
 
-    onGamePlaying: function(number){
+    createPips(){
+
+    },
+
+    onGameStart(event, customEventData) {
+        var btnStart = event.target;
+        var readyLayer = this.readyLayer;
+        readyLayer.active = false;
+
+        var GameStatus = Utils.GameStatus;
+
+        
+        if(this.gameStatus == GameStatus.READY) {
+            var bird = this.bird.getComponent("bird");
+            bird.fly();
+            this.gameStatus = GameStatus.START;
+            this.createPips();
+
+            // this->delegator->onGameStart();
+            // this->bird->fly();
+            // this->gameStatus = GAME_STATUS_START;
+            // this->createPips();
+        }else if(this.gameStatus == GameStatus.START) {
+            // this->bird->getPhysicsBody()->setVelocity(Vect(0, 260));
+        }
+    },
+
+    onGameEnd(){
+
+    },
+
+    onGamePlaying(number){
         var scoreContainer = this.scoreNode;
         scoreContainer.removeAllChildren();
         if(number == 0){
@@ -70,18 +106,15 @@ cc.Class({
 
     },
 
-    onGameStart: function (event, customEventData) {
-        var btnStart = event.target;
-        var readyLayer = this.readyLayer;
-        readyLayer.active = false;
-    },
-
     start () {
 
     },
 
     update (dt) {
-
+        if (this.gameStatus == Utils.GameStatus.START) {
+            // this.rotateBird();
+            // this.checkHit();
+        }
 
     },
 });
