@@ -37,10 +37,21 @@ cc.Class({
 
     },
 
+    onBeginContact(contact, self, other) {
+        switch (other.tag) {
+            case 1://球碰到砖块
+                cc.log("--->碰到上水管");
+                break;
+            case 2://球碰到地面
+                cc.log("--->碰到下管");
+                break;
+        }
+    },
+
     fly(){
 
     },
-    
+
     idle(){
 
     }

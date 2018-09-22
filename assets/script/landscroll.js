@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
+var Utils = require("common");
 cc.Class({
     extends: cc.Component,
 
@@ -43,10 +43,31 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        var GameStatus = Utils.GameStatus;
+        this.gameStatus = GameStatus.READY;
+    },
 
     start () {
 
+    },
+
+    onGameStart() {
+        var pip1 = this.pip1;
+        var pip2 = this.pip2;
+        pip1.active = true;
+        pip1.active = true;
+        var GameStatus = Utils.GameStatus;
+        this.gameStatus = GameStatus.START;
+    },
+
+    onGameReady(){
+        var pip1 = this.pip1;
+        var pip2 = this.pip2;
+        pip1.active = false;
+        pip1.active = false;
+        var GameStatus = Utils.GameStatus;
+        this.gameStatus = GameStatus.READY;
     },
 
     update (dt) {
@@ -65,21 +86,18 @@ cc.Class({
         var pip2 = this.pip2;
         var pips = [pip1, pip2];
         if(pip1 && pip2){
-            for(var i = 0; i < pips.length; i++){
-                var p = pips[i];
-                p.x = p.x - 2;
-                if(p.x < -170){
-                    p.x = 170;
-                    p.y = this.getRandomHeight();
+            var GameStatus = Utils.GameStatus;
+            if(this.gameStatus == GameStatus.START){
+                for(var i = 0; i < pips.length; i++){
+                    var p = pips[i];
+                    p.x = p.x - 2;
+                    if(p.x < -170){
+                        p.x = 170;
+                        p.y = this.getRandomHeight();
+                    }
                 }
-        //         singlePip->setPositionX(singlePip->getPositionX() - 2);
-        // if(singlePip->getPositionX() < -PIP_WIDTH) {
-        //     singlePip->setTag(PIP_NEW);
-        //     Size visibleSize = Director::getInstance()->getVisibleSize();
-        //     singlePip->setPositionX(visibleSize.width);
-        //     singlePip->setPositionY(this->getRandomHeight());
-        // }
             }
+            
         }
     },
 

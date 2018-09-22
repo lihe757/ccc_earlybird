@@ -36,7 +36,12 @@ cc.Class({
 
     onLoad () {
         this._score = 0;
+        this.physicsManager = cc.director.getPhysicsManager();
+        this.physicsManager.enabled = true;
+        
         this.gameStatus = Utils.GameStatus.READY;
+
+
 
         this.node.on(cc.Node.EventType.TOUCH_END, function(){
             cc.log("----vvv");
@@ -45,7 +50,7 @@ cc.Class({
                 this.onGameStart();
             }
         }.bind(this), this);
-        
+
         // this.schedule(function(){
         //     cc.log("----vvv");
             
@@ -55,7 +60,8 @@ cc.Class({
     },
 
     createPips(){
-
+        var landScroll = this.node.getComponent("landscroll");
+        landScroll.onGameStart();
     },
 
     onGameStart() {
@@ -67,7 +73,9 @@ cc.Class({
             var bird = this.bird.getComponent("bird");
             bird.fly();
             this.gameStatus = GameStatus.START;
-            this.createPips();
+            
+            var landScroll = this.node.getComponent("landscroll");
+            landScroll.onGameStart();
 
             // this->delegator->onGameStart();
             // this->bird->fly();
