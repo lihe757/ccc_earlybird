@@ -37,6 +37,15 @@ cc.Class({
     onLoad () {
         this._score = 0;
         this.gameStatus = Utils.GameStatus.READY;
+
+        this.node.on(cc.Node.EventType.TOUCH_END, function(){
+            cc.log("----vvv");
+            var GameStatus = Utils.GameStatus;
+            if(this.gameStatus == GameStatus.READY) {
+                this.onGameStart();
+            }
+        }.bind(this), this);
+        
         // this.schedule(function(){
         //     cc.log("----vvv");
             
@@ -49,14 +58,11 @@ cc.Class({
 
     },
 
-    onGameStart(event, customEventData) {
-        var btnStart = event.target;
+    onGameStart() {
         var readyLayer = this.readyLayer;
         readyLayer.active = false;
 
         var GameStatus = Utils.GameStatus;
-
-        
         if(this.gameStatus == GameStatus.READY) {
             var bird = this.bird.getComponent("bird");
             bird.fly();
