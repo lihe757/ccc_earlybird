@@ -31,19 +31,22 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
-    start () {
-
+    onLoad () {
+        this.anim = this.node.getComponent(cc.Animation);
     },
+
+    init (gameCtrl) {
+        this.gameCtrl = gameCtrl;
+    },
+    
 
     onBeginContact(contact, self, other) {
         switch (other.tag) {
             case 1://球碰到砖块
-                cc.log("--->碰到上水管");
-                break;
             case 2://球碰到地面
-                cc.log("--->碰到下管");
+                cc.log("--->碰到水管");
+                this.die();
+                this.gameCtrl.onGameEnd();
                 break;
         }
     },
@@ -54,6 +57,10 @@ cc.Class({
 
     idle(){
 
+    },
+
+    die(){
+        this.anim.stop();
     }
 
     // update (dt) {},

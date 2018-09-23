@@ -92,8 +92,10 @@ cc.Class({
                     var p = pips[i];
                     p.x = p.x - 2;
                     if(p.x < -170){
+                        p.getComponent("pip").passType = 0;
                         p.x = 170;
                         p.y = this.getRandomHeight();
+                        
                     }
                 }
             }

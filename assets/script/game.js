@@ -41,7 +41,8 @@ cc.Class({
 
         this.gameStatus = Utils.GameStatus.READY;
 
-
+        //设置控制器
+        this.bird.getComponent("bird").init(this);
 
         this.node.on(cc.Node.EventType.TOUCH_END, function(){
             cc.log("----vvv");
@@ -53,13 +54,6 @@ cc.Class({
                 this.bird.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, 200);
             }
         }.bind(this), this);
-
-        // this.schedule(function(){
-        //     cc.log("----vvv");
-            
-        //     this.onGamePlaying(this._score++);
-        // }.bind(this), 1);
-
     },
 
     createPips(){
@@ -90,37 +84,11 @@ cc.Class({
     },
 
     onGameEnd(){
-
+        cc.log("--->game over");
     },
 
     onGamePlaying(number){
-        var scoreContainer = this.scoreNode;
-        scoreContainer.removeAllChildren();
-        if(number == 0){
-            var scoreNode= new cc.Node('Sprite');
-            var sp = scoreNode.addComponent(cc.Sprite);
-            scoreNode.parent = scoreContainer;
-            var frame = this.numberAtlas.getSpriteFrame(Utils.sprintf("number_score_%02d", number));
-            sp.spriteFrame = frame;
-        }
-
-        var totalWidth = 0;
-        var numCount = 0;
-        while(number){
-            numCount++;
-            var temp = number % 10;
-            number /= 10;
-            number = parseInt(number);
-            var scoreNode= new cc.Node('Sprite');
-            var sp = scoreNode.addComponent(cc.Sprite);
-            scoreNode.parent = scoreContainer;
-            var frame = this.numberAtlas.getSpriteFrame(Utils.sprintf("number_score_%02d", temp));
-            sp.spriteFrame = frame;
-            totalWidth += scoreNode.width;
-            scoreNode.x -= (numCount - 1) * scoreNode.width;
-        }
-        // scoreContainer.width = totalWidth;
-
+        this.scoreNode.getComponent(cc.Label).string = "" + number;
     },
 
     start () {
@@ -133,10 +101,26 @@ cc.Class({
         bird.setRotation(Math.min(Math.max(-90, (verticalSpeed*0.2 + 60)), 30));
     },
 
+    checkHit(){
+        var landScroll = this.node.getComponent("landscroll");
+        var pips = [landScroll.pip1, landScroll.pip2];
+        for(var i = 0; i < pips.length; i++){
+            var pip = pips[i];
+            var pcom = pip.getComponent("pip");
+            if (pcom.passType == 0) {
+                if (pip.x < this.bird.x) {
+                    this._score++;
+                    this.onGamePlaying(this._score);
+                    pcom.passType = 1;
+                }
+            }
+        }
+    },
+
     update (dt) {
         if (this.gameStatus == Utils.GameStatus.START) {
             this.rotateBird();
-            // this.checkHit();
+            this.checkHit();
         }
 
     },
