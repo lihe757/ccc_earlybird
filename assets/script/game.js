@@ -29,6 +29,10 @@ cc.Class({
         bird:{
             type: cc.Node,
             default: null
+        },
+        gameOver:{
+            type: cc.Node,
+            default: null
         }
     },
 
@@ -43,10 +47,13 @@ cc.Class({
 
         //设置控制器
         this.bird.getComponent("bird").init(this);
+        this.gameOver.active = false;
 
+        var GameStatus = Utils.GameStatus;
         this.node.on(cc.Node.EventType.TOUCH_END, function(){
-            cc.log("----vvv");
-            var GameStatus = Utils.GameStatus;
+            if(this.gameStatus == GameStatus.OVER) {
+                return;
+            }
             if(this.gameStatus == GameStatus.READY) {
                 this.onGameStart();
             }
@@ -83,7 +90,24 @@ cc.Class({
         }
     },
 
-    onGameEnd(){
+    onGameOver(){
+        this.physicsManager.enabled = false;
+
+        var GameStatus = Utils.GameStatus;
+        if(this.gameStatus == GameStatus.OVER) {
+            return;
+        }
+
+        var landScroll = this.node.getComponent("landscroll");
+        landScroll.stopShiftLand();
+
+        var bird = this.bird.getComponent("bird");
+        bird.die();
+
+        this.gameOver.active = true;
+        this.gameOver.getComponent("gameover").showScore(this._score);
+
+
         cc.log("--->game over");
     },
 
@@ -122,6 +146,10 @@ cc.Class({
             this.rotateBird();
             this.checkHit();
         }
-
     },
+
+    restartGame(){
+        cc.log("restat game");
+        cc.director.loadScene("Game");
+    }
 });

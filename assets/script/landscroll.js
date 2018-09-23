@@ -46,6 +46,8 @@ cc.Class({
     onLoad () {
         var GameStatus = Utils.GameStatus;
         this.gameStatus = GameStatus.READY;
+
+        this.shiftLand = this.pip1 && this.pip2;
     },
 
     start () {
@@ -70,7 +72,14 @@ cc.Class({
         this.gameStatus = GameStatus.READY;
     },
 
+    stopShiftLand(){
+        this.shiftLand = false;
+    },
+
     update (dt) {
+        if(!this.shiftLand){
+            return;
+        }
         var land1 = this.land1;
         var land2 = this.land2;
         var bg = this.bg;
@@ -82,6 +91,7 @@ cc.Class({
             land1.x = -halfBgW;
         }
 
+        
         var pip1 = this.pip1;
         var pip2 = this.pip2;
         var pips = [pip1, pip2];

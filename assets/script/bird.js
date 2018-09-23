@@ -41,26 +41,23 @@ cc.Class({
     
 
     onBeginContact(contact, self, other) {
-        switch (other.tag) {
-            case 1://球碰到砖块
-            case 2://球碰到地面
-                cc.log("--->碰到水管");
-                this.die();
-                this.gameCtrl.onGameEnd();
-                break;
-        }
+        cc.log("--->碰到水管");
+        this.gameCtrl.onGameOver();
     },
 
     fly(){
-
+        var pbody = this.getComponent(cc.RigidBody);
+        pbody.gravityScale = 1;
     },
 
     idle(){
-
+        var pbody = this.getComponent(cc.RigidBody);
+        pbody.gravityScale = 0;
     },
 
     die(){
         this.anim.stop();
+        // this.node.rotation = -90;
     }
 
     // update (dt) {},
